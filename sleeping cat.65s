@@ -1,0 +1,91 @@
+;Fatima Rehan
+;October 14th, 2022
+;ICS301 Computer Science
+;This program will print images of a sleeping cat.
+
+	;set location
+
+clearscreen = $E000
+io_putc = $E001
+io_posx = $E005
+io_posy = $E006
+
+	.ORG $00
+	
+	;set location position	
+Start:		
+	LDA #0
+	STA io_posx
+	LDA #0
+	STA io_posy
+	LDX #$0
+
+	;display image 1 forever 
+loop:
+	LDA $100,X
+	STA io_putc
+	INX
+	LDA $100,X
+	BNE loop
+	STA $E000
+	
+	;set cursor position
+
+	LDA #0
+	STA io_posx
+	LDA #0
+	STA io_posy
+	LDX #$0	
+
+	;display image 2 forever
+loop2:
+	LDA $200,X
+	STA io_putc
+	INX
+	LDA $200,X
+	BNE loop2
+	JMP Start
+	STA $E000
+
+	;image 1
+	
+	.ORG $100
+		
+	.DB	"       ZZzzz |\    . _,,,--,,_        ",$A, $D	
+	.DB	"   )))       /,'.-' '   ._  \-;;,     ",$A, $D
+	.DB	"   (((      |,4-  ) )_   .;.(  ''-'   ",$A, $D
+	.DB	" <°+++<    '---''(_/._)-'(_\_)",$A, $D
+	.DB	" _____________________________________"  
+
+	;image 2
+	
+	.ORG $200
+		
+	.DB	"       zzZZZ |\    . _,,,--,,_   ._.  ",$A, $D
+	.DB	"   (((       /.'.-' '   ._  \-;;,-'   ",$A, $D
+	.DB	"   )))      |,4-  ) )_   .;.(         ",$A, $D
+	.DB	" <°+++<    '---''(_/._)-'(_\_)",$A, $D
+	.DB	" _____________________________________"  
+
+ 
+	.END 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+		
